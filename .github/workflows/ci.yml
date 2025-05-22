@@ -5,7 +5,11 @@ on:
     branches:
       - main
   schedule:
-    - cron: "36 8,10,14,18,23 * * *"
+    - cron: "36 8 * * *"
+    - cron: "12 10 * * *"
+    - cron: "21 14 * * *"
+    - cron: "18 18 * * *"
+    - cron: "8 23 * * *"
 
 jobs:
   autogreen:
@@ -16,6 +20,7 @@ jobs:
 
       - name: Auto green
         run: |
+          sleep $((RANDOM % 600))  # 随机等待 0~599 秒（最多 10 分钟）
           git config --local user.email "Yinn357@qq.com"
           git config --local user.name "Yinx"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
